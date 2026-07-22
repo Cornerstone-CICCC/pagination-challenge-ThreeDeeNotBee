@@ -1,77 +1,75 @@
-# Pagination Challenge
+# React + TypeScript + Vite
 
-## Overview
-This challenge is designed to test your understanding of React, specifically focusing on the usage of `useState` for state management. In this challenge, you'll be building a paginated list application where users can navigate through pages and control the number of items displayed per page.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-1. **List Display:**
-   - Display a list of items, each containing information such as name or description.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-2. **Pagination Controls:**
-   - Show pagination controls including previous and next buttons, and a current page indicator.
-   - Use `useState` to manage the current page state.
+## React Compiler
 
-3. **Page Navigation:**
-   - Implement functionality to navigate to the next and previous pages.
-   - Ensure not to go beyond the boundaries of the available pages.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-4. **Items per Page:**
-   - Allow users to choose the number of items displayed per page (e.g., 5, 10, 20).
-   - Use `useState` to manage the items per page state.
+## Expanding the ESLint configuration
 
-## Getting Started
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-1. Clone this repository to your local machine and navigate to the project directory.
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-2. Install the required dependencies using npm.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-```bash
-npm install
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
 ```
 
-3. Start the development server to view the application in your browser.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-npm run dev
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
 ```
-
-## Instructions
-
-1. Implement the pagination controls using useState for managing the current page.
-2. Enable navigation between pages and ensure that the controls are disabled when necessary.
-3. Implement the option to choose the number of items displayed per page.
-4. Ensure that the correct items are displayed based on the current page and items per page.
-5. Customize the styling to make the application look modern and visually appealing.
-
-## Bonus Tasks
-
-1. **Page Number Input:**
-   - Include an input field allowing users to directly input the page number they want to navigate to.
-   - Use `useState` to handle the input and update the current page accordingly.
-
-2. **Loading State:**
-   - Show a loading state while fetching data from the API.
-   - Use `useState` to manage a loading state.
-
-## Screenshots
-
-Here are some screenshots to help you understand the requirements and visualize the expected outcome.
-
-### Default View
-
-![Default View](public/ss1.png)
-
-### Pagination Controls
-
-![Pagination Controls](public/ss2.png)
-
-## Demo Video
-
-Here's a demo video to help you understand the functionality and visualize the expected outcome.
-
-[Watch the Demo Video](https://youtu.be/86rOeSEZPAM)
-
-## Feedback
-
-If you have any questions or need clarification on any aspect of the challenge, feel free to reach out. Good luck, and happy coding!
